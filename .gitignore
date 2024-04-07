@@ -3,3 +3,4 @@
 .env
 # local env files
 /backend/config/config.env
+.vercel
