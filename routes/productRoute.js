@@ -8,7 +8,7 @@ router.route('/products').get(getAllProducts);
 router.route('/products/all').get(getProducts);
 
 router.route('/admin/products').get(getAdminProducts);
-router.route('/admin/product/new').post(isAuthenticatedUser, createProduct);
+router.route('/admin/product/new').post(createProduct);
 
 router.route('/admin/product/:id')
 		.put(isAuthenticatedUser,updateProduct)
