@@ -13,6 +13,7 @@ const sendToken = (user, statusCode, res) => {
 		user,
 		token,
 	});
+	localStorage.setItem('token',token)
 }
 
 module.exports = sendToken;
