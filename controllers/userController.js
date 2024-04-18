@@ -69,6 +69,7 @@ exports.logoutUser = asyncErrorHandler(async (req, res, next) => {
 
 // Get User Details
 exports.getUserDetails = asyncErrorHandler(async (req, res, next) => {
+	console.log(req);
 
 	const user = await User.findById(req.user.id);
 
