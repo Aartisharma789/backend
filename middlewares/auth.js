@@ -5,11 +5,20 @@ const asyncErrorHandler = require('./asyncErrorHandler');
 
 exports.isAuthenticatedUser = asyncErrorHandler(async (req, res, next) => {
 
-	const { token } = req.cookies;
-	console.log(token)
+	let token;
+
+	// Check if the token exists in the cookies
+	if (req.cookies.token) {
+			token = req.cookies.token;
+	}
+	// If not in cookies, check if it exists in the request header
+	else if (req.headers.authorization) {
+			// Extract the token from the Authorization header
+			token = req.headers.authorization;
+	}
 
 	if (!token) {
-		return next(new ErrorHandler("Please Login to Access", 401))
+		return next(new ErrorHandler("Please provide a token to access this route", 401))
 	}
 
 	const decodedData = jwt.verify(token, process.env.JWT_SECRET);
