@@ -14,7 +14,7 @@ router.route('/admin/product/:id')
 		.put(isAuthenticatedUser,updateProduct)
 		.delete(isAuthenticatedUser,deleteProduct);
 
-router.route('/product/:id').get(isAuthenticatedUser,getProductDetails);
+router.route('/product/:id').get(getProductDetails);
 
 router.route('/review').put(isAuthenticatedUser, createProductReview);
 
