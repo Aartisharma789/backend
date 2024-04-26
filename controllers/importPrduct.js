@@ -17,19 +17,19 @@ exports.fetchAmazonProduct = asyncErrorHandler(async (req, res, next) => {
 		const $ = cheerio.load(response.data);
 
 		const title = $('#productTitle').text().trim();
+		const description = $('ul.a-unordered-list.a-vertical.a-spacing-mini li')
+			.map((_, element) => $(element).text().trim())
+			.get()
+			.join(' ')
+			.replace(/,/g, '');
 		const priceMatch = $('.a-price-whole').first().text().trim().match(/\d{1,3}(,\d{3})*(\.\d+)?/);
-const price = priceMatch ? priceMatch[0].replace(/,/g, '') : '';
+		const price = priceMatch ? priceMatch[0].replace(/,/g, '') : '';
 		const imageUrl = $('#imgTagWrapperId img').attr('src');
 		const brand = $('.po-brand .a-size-base.a-text-bold').text().trim();
 		const cuttedPriceWithCurrency = $('.a-price.a-text-price').first().text().trim();
 		const cuttedPriceMatch = cuttedPriceWithCurrency.match(/\d{1,3}(,\d{3})*(\.\d+)?/);
 		const cuttedPrice = cuttedPriceMatch ? cuttedPriceMatch[0].replace(/,/g, '') : '';
 		const brandImageUrl = $('#imgTagWrapperId img').attr('src');
-		const description = $('ul.a-unordered-list.a-vertical.a-spacing-mini li')
-			.map((_, element) => $(element).text().trim())
-			.get()
-			.join(' ')
-			.replace(/,/g, '');
 
 		const amazonProductDetails = {
 			title,
