@@ -25,9 +25,15 @@ const price = priceMatch ? priceMatch[0].replace(/,/g, '') : '';
 		const cuttedPriceMatch = cuttedPriceWithCurrency.match(/\d{1,3}(,\d{3})*(\.\d+)?/);
 		const cuttedPrice = cuttedPriceMatch ? cuttedPriceMatch[0].replace(/,/g, '') : '';
 		const brandImageUrl = $('#imgTagWrapperId img').attr('src');
+		const description = $('ul.a-unordered-list.a-vertical.a-spacing-mini li')
+			.map((_, element) => $(element).text().trim())
+			.get()
+			.join(' ')
+			.replace(/,/g, '');
 
 		const amazonProductDetails = {
 			title,
+			description,
 			price,
 			imageUrl,
 			brand,
