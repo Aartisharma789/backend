@@ -25,7 +25,8 @@ exports.fetchAmazonProduct = asyncErrorHandler(async (req, res, next) => {
 		const priceMatch = $('.a-price-whole').first().text().trim().match(/\d{1,3}(,\d{3})*(\.\d+)?/);
 		const price = priceMatch ? priceMatch[0].replace(/,/g, '') : '';
 		const imageUrl = $('#imgTagWrapperId img').attr('src');
-		const brand = $('.po-brand .a-size-base.a-text-bold').text().trim();
+		const brandString = $('.po-brand .a-size-base').text().trim();
+		const brand = brandString.match(/Brand(.+)/)[1];
 		const cuttedPriceWithCurrency = $('.a-price.a-text-price').first().text().trim();
 		const cuttedPriceMatch = cuttedPriceWithCurrency.match(/\d{1,3}(,\d{3})*(\.\d+)?/);
 		const cuttedPrice = cuttedPriceMatch ? cuttedPriceMatch[0].replace(/,/g, '') : '';
