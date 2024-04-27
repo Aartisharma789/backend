@@ -10,7 +10,6 @@ exports.fetchAmazonProduct = asyncErrorHandler(async (req, res, next) => {
 		const amazonLocale = 'in';
 
 		const url = `https://www.amazon.${amazonLocale}/dp/${asin}`;
-		console.log(url);
 
 		const response = await axios.get(url);
 
